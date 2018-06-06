@@ -18,52 +18,52 @@ class MergeSort():
     def mergeSort(self, arr):
         if(arr is None or len(arr) < 2): 
             return
-        self.sortProcess(arr, 0, len(arr)-1)
+        self.sortProcess(arr, 0, len(arr) - 1)
         return arr
 
     def sortProcess(self, arr, left, right):
-        if ( left == right ):
+        if (left == right):
             return
-        mid = left + (right - left)/2
+
+        # here int conversion is a must, otherwise mid would be float
+        mid = int(left + (right - left) / 2)
         self.sortProcess(arr, left, mid)
-        self.sortProcess(arr, mid+1, right)
+        self.sortProcess(arr, mid + 1, right)
         self.merge(arr, left, mid, right)
 
     def merge(self, arr, left, mid, right):
         tempList = []
         p1 = left
         p2 = mid + 1
-        while ( p1 <= mid and p2 <= right):
-            if(arr[p1] > arr[p2]):
+
+        while (p1 <= mid and p2 <= right):
+            if(arr[p1] >= arr[p2]):
                 tempList.append(arr[p2])
                 p2 += 1
             else:
                 tempList.append(arr[p1])
                 p1 += 1
-        while( p1 <= mid):
+
+        while(p1 <= mid):
             tempList.append(arr[p1])
             p1 += 1
-        while( p2 <= right):
+        while(p2 <= right):
             tempList.append(arr[p2])
             p2 += 1
-        
-        for x in range(0, len(tempList)):
+
+        # here len(tempList) cannot be len(tempList) - 1, since range would ignore len(tempList) - 1
+        for x in range(0, len(tempList)):   
             arr[left + x] = tempList[x]
 
-
-
-
-    def getMax(self,arr, left, right):
-        print(left)
-
+    # get the maximum value
+    def getMax(self, arr, left, right):
         if(left == right):
             return arr[left]
-
-        mid = left + (right - left)/2
-        print("mid is ", mid)
+        # int conversion is a must, otherwise mid would get float number
+        mid = int(left + (right - left) / 2)
         maxleft = self.getMax(arr, left, mid)
-        maxright = self.getMax(arr, mid+1, right)
-        return max(maxleft,maxright)
+        maxright = self.getMax(arr, mid + 1, right)
+        return max(maxleft, maxright)
 
 def rightAnswer(arr):
     return sorted(arr)
@@ -72,9 +72,14 @@ if __name__ == "__main__":
     mySort = MergeSort()
     arr = [ random.randint(0,30) for x in range(random.randint(5,10)) ]
     print("unsorted array is ", arr)
-    print(mySort.getMax(arr, 0, len(arr)-1))
+
+    print(mySort.getMax(arr, 0, len(arr) - 1))
+
     arrSorted = mySort.mergeSort(arr)
     print("my sorted array is ", arrSorted)
+
     if(rightAnswer(arr) == arrSorted):
         print("true")
+    else:
+        print("the answer is incorrect.")
 
