@@ -1,12 +1,4 @@
-# merge sort, it starts with the i=1 position, each time j would check wheter there is a number existed which is smaller than that. if it does than change it 
-# in worst case, the complexity is O(n^2), the reason is it sums n+n-1+n-2+...+1, it's a arithmetic progression
-# master theorem is T(N) = a*T(N/b) + O(N^d)
-# a represents how many times that the seperation occur
-# N/b represents the size of the child sample
-# n^d stands for the complexity of the remained procedures(such as comparison)
-# log(b,a) > d -> O(N^log(b,a))
-# log(b,a) = d -> O(N^d * logN)
-# log(b,a) < d -> O(N^d)
+# netherlands partiton flag is a good example to understand the partion for quicksort
 # www.gocalf.com/blog/algorithm-complexity-and-master-theorem.html
 import random
 class NetherlandsFlag():
