@@ -7,35 +7,49 @@ class HeapSort():
         arr[i] = arr[j]
         arr[j] = temp
 
-    def partition(self, arr, L, R):
-        num = arr[R]
-        less = L - 1
-        more = R 
-        cur = L
-        while (cur < more):
-            if(arr[cur] < num):
-                less += 1
-                self.swap(arr, cur, less)
-                cur += 1
-            elif(arr[cur] == num):
-                cur += 1
+    def heapInsert(self, arr, index):
+        parent = int((index - 1) / 2)
+        while(arr[index] > arr[parent]):
+            self.swap(arr, index, parent)
+            index = parent
+            parent = int((index - 1) / 2)
+
+    def heapify(self, arr, index, size):
+        left = 2 * index + 1
+        while (left < size):
+            if(left + 1 < size and arr[left] < arr[left + 1]):
+                largest = left + 1
+            elif(left + 1 < size and arr[left] >= arr[left + 1]):
+                largest = left
             else:
-                more -= 1
-                self.swap(arr, cur, more)
-        print(arr[more], arr[R])
-        self.swap(arr, more, R)
-        return [less + 1, more]
+                largest = left
+            if(arr[index] < arr[largest]):
+                largest = largest
+            else:
+                largest = index
+            if(arr[index] == arr[largest]):
+                break
+            
+            self.swap(arr, index, largest)
+            index = largest
+            left = 2 * index + 1
 
-    def heapsort(self, arr, L, R):
-        if(L < R):
-            # random to insure the NlogN
-            self.swap(arr, random.randint(L, R), R)
-            bound = self.partition(arr, L, R)
-            self.quicksort(arr, L, bound[0] - 1)
-            self.quicksort(arr, bound[1] + 1, R)
+    def heapsort(self, arr):
+        if(arr is None or len(arr) < 2):
+            return
+        # insert one by one from array and form the big root heap
+        for i in range(0, len(arr)):
+            self.heapInsert(arr, i)
+        
+        # put the largest number to the last position and heapsize-- to keep it always there
+        size = len(arr) - 1
+        self.swap(arr, 0, size)
+        while(size > 0):
+            self.heapify(arr, 0, size)
+            size -= 1
+            self.swap(arr, 0, size)
+
         return arr
-
-    
 
     # get the maximum value
     def getMax(self, arr, left, right):
@@ -57,7 +71,7 @@ if __name__ == "__main__":
 
     print(mySort.getMax(arr, 0, len(arr) - 1))
 
-    arrSorted = mySort.heapsort(arr, 0, len(arr) - 1)
+    arrSorted = mySort.heapsort(arr)
     print("my sorted array is ", arrSorted)
 
     if(rightAnswer(arr) == arrSorted):
