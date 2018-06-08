@@ -1,4 +1,6 @@
 # heapsort the most important one, which achieve the logN when do insertions.
+# heapsort: time complexity is NlogN space complexity is O(1)
+# heapbuilding(heapInsert): time complexity is O(N)
 # www.gocalf.com/blog/algorithm-complexity-and-master-theorem.html
 import random
 class HeapSort():
