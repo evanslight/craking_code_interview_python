@@ -3,6 +3,7 @@
 # heapbuilding(heapInsert): time complexity is O(N)
 # www.gocalf.com/blog/algorithm-complexity-and-master-theorem.html
 import random
+from operator import itemgetter, attrgetter, methodcaller
 class HeapSort():
     def swap(self, arr, i, j):
         temp = arr[i]
@@ -66,9 +67,35 @@ class HeapSort():
 def rightAnswer(arr):
     return sorted(arr)
 
+class Student:
+    def __init__(self, name, grade, age):
+        self.name = name
+        self.grade = grade
+        self.age = age
+    def __repr__(self):
+        return repr((self.name, self.grade, self.age))
+    def weighted_grade(self):
+        return 'CBA'.index(self.grade) / float(self.age)
+
 if __name__ == "__main__":
     mySort = HeapSort()
     arr = [ random.randint(0,30) for x in range(random.randint(5,10)) ]
+    # practice for sorted with comparators
+    student_tuples = [
+            ('john', 'A', 15),
+            ('jane', 'B', 12),
+            ('dave', 'B', 10),
+            ]
+    student_objects = [
+            Student('john', 'A', 15),
+            Student('jane', 'B', 12),
+            Student('dave', 'B', 10),
+            ]
+    print(sorted(student_tuples, key = lambda x: x[2], reverse=True))
+    print(sorted(student_objects, key = lambda x: x.age))
+    print(sorted(student_tuples, key = itemgetter(1, 2)))
+    print(sorted(student_objects, key = attrgetter('grade', 'age')))
+    print(sorted(student_objects, key = methodcaller('weighted_grade')))
     print("unsorted array is ", arr)
 
     print(mySort.getMax(arr, 0, len(arr) - 1))
