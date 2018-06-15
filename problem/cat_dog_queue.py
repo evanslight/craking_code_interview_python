@@ -1,3 +1,9 @@
+# implement a dog and cat queue structure. the requirements are as below:
+# user can put class cat and class dog into a queue. user can use pollAll method
+# to retrieve from queue based on the sequence of queue input. user can call
+# pollCat to retrieve the cat based on the queue order.
+# call pollDog to retrieve the dog based on the same way
+# user can call isDogEmpty and isCatEmpty to check whether there is dog or cat
 from collections import deque
 class Pet():
     type = ""
@@ -81,6 +87,17 @@ class PetCatQueue():
         else:
             print("queue is empty")
 
+    def isDogEmpty(self):
+        if(len(dogq) == 0):
+            print("dog queue is empty")
+        else:
+            print("dog queue is not empty")
+
+    def isCatEmpty(self):
+        if(len(catq) == 0):
+            print("cat queue is empty")
+        else:
+            print("cat queue is not empty")
 
 
 if __name__ == "__main__":
