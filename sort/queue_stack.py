@@ -9,7 +9,7 @@ class queue_stack():
         self.__queue1.append(item)
 
     def pop(self):
-        if (self.__queue1 == []):
+        if (len(self.__queue1) == 0):
             print("the stack is empty")
             return
         while (len(self.__queue1) > 1):
