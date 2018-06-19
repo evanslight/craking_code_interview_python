@@ -1,5 +1,4 @@
-# given a matrix with integers. please print it in the spiral order way
-# the space complexity should be O(1)
+# check a list whether palindrome in different space complexity
 import numpy as np
 class Node:
     def __init__(self, data):
