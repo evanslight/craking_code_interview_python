@@ -53,15 +53,19 @@ class BinaryTreeTran:
 
     def pos_order_iter(self, head):
         if (head is not None):
+            print_stack = []
             stack = []
-            while (len(stack) > 0 or head is not None):
-                if (head is not None):
-                    stack.append(head)
-                    head = head.left
-                else:
-                    head = stack.pop()
-                    print(head.data, end=" ")
-                    head = head.right
+            stack.append(head)
+            while (len(stack) > 0):
+                head = stack.pop()
+                print_stack.append(head)
+                if (head.left is not None):
+                    stack.append(head.left)
+                if (head.right is not None):
+                    stack.append(head.right)
+            
+            while (len(print_stack) > 0):
+                print(print_stack.pop().data, end=" ")
 
 if __name__=="__main__":
     print("hello")
