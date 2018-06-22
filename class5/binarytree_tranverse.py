@@ -26,6 +26,43 @@ class BinaryTreeTran:
         self.pos_order_recu(head.left)
         self.pos_order_recu(head.right)
         print(head.data, end=" ")
+
+    def pre_order_iter(self, head):
+        if (head is not None):
+            stack = []
+            stack.append(head)
+            while (len(stack) > 0):
+                head = stack.pop()
+                print(head.data, end=" ")
+                if (head.right is not None):
+                    stack.append(head.right)
+                if (head.left is not None):
+                    stack.append(head.left)
+
+    def in_order_iter(self, head):
+        if (head is not None):
+            stack = []
+            while (len(stack) > 0 or head is not None):
+                if (head is not None):
+                    stack.append(head)
+                    head = head.left
+                else:
+                    head = stack.pop()
+                    print(head.data, end=" ")
+                    head = head.right
+
+    def pos_order_iter(self, head):
+        if (head is not None):
+            stack = []
+            while (len(stack) > 0 or head is not None):
+                if (head is not None):
+                    stack.append(head)
+                    head = head.left
+                else:
+                    head = stack.pop()
+                    print(head.data, end=" ")
+                    head = head.right
+
 if __name__=="__main__":
     print("hello")
     root = Node(1)
@@ -54,3 +91,11 @@ if __name__=="__main__":
     print("===")
     tranverse.pos_order_recu(root)
     print()
+    print("===")
+    tranverse.pre_order_iter(root)
+    print()
+    print("===")
+    tranverse.in_order_iter(root)
+    print()
+    print("===")
+    tranverse.pos_order_iter(root)
