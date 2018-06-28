@@ -66,6 +66,30 @@ class BinaryTreeTran:
             
             while (len(print_stack) > 0):
                 print(print_stack.pop().data, end=" ")
+    
+    def print_whole_tree(self, head):
+        self.print_tree(head, 0, "H", 17)
+
+
+    def print_tree(self, head, height, to, maxlen):
+        if (head is None):
+            return
+        self.print_tree(head.right, height + 1, "v", maxlen)
+        val = to + str(head.data) + to
+        lenM = len(val)
+        lenL = int ((maxlen - lenM) / 2)
+        lenR = int (maxlen - lenM - lenL)
+        val = self.getSpace(lenL) + val + self.getSpace(lenR)
+        print(self.getSpace(height * maxlen) + val)
+        self.print_tree(head.left, height + 1,"^", maxlen)
+
+    def getSpace(self, num):
+        space = " "
+        buf = ""
+        for x in range(0, num):
+            buf += space
+        return str(buf)
+
 
 if __name__=="__main__":
     print("hello")
@@ -103,3 +127,6 @@ if __name__=="__main__":
     print()
     print("===")
     tranverse.pos_order_iter(root)
+    print()
+
+    tranverse.print_whole_tree(root)
