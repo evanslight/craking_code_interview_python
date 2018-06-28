@@ -79,11 +79,11 @@ class BinaryTreeTran:
         lenM = len(val)
         lenL = int ((maxlen - lenM) / 2)
         lenR = int (maxlen - lenM - lenL)
-        val = self.getSpace(lenL) + val + self.getSpace(lenR)
-        print(self.getSpace(height * maxlen) + val)
+        val = self.get_space(lenL) + val + self.get_space(lenR)
+        print(self.get_space(height * maxlen) + val)
         self.print_tree(head.left, height + 1,"^", maxlen)
 
-    def getSpace(self, num):
+    def get_space(self, num):
         space = " "
         buf = ""
         for x in range(0, num):
